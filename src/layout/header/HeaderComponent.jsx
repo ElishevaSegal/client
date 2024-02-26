@@ -180,22 +180,20 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             right: { xs: 15, sm: 80 },
             my: 2,
             p: 1,
-            color: "red",
           }}
         >
           <Switch
             checked={isDarkTheme}
             onChange={handleThemeChange}
-            sx={{ backgroundColor:"black" }}
-            icon={<WbSunny />} // Icon for light mode
-            checkedIcon={<NightlightRoundIcon />} // Icon for dark mode
+            icon={<WbSunny style={{ color: 'white' }} />} // Icon for light mode
+            checkedIcon={<NightlightRoundIcon style={{ color: 'white' }} />} // Icon for dark mode
             // You can adjust styles for the switch if needed
           />
         </Box>
+          <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", sm: "flex" } }}>
             <FilterComponent />
           </Box>
-          <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", sm: "flex" } }}>
             <IconButton
               size="large"

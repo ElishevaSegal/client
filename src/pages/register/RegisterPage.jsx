@@ -369,6 +369,7 @@ const RegisterPage = () => {
                 />
               }
               label="Seller account"
+              color="primary"
             />
           </Grid>
         </Grid>

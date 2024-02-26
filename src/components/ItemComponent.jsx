@@ -161,7 +161,7 @@ const ItemComponent = ({
             item
             sx={{ display: statusVal === "available" ? "none" : "block" }}
           >
-            <Typography variant="body2">{status}</Typography>
+            <Typography variant="body2" color="primary">{status}</Typography>
           </Grid>
           <Grid item>
             <Typography variant="body1">{price}</Typography>
