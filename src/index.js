@@ -15,7 +15,8 @@ import store from "./store/bigPie";
 import { Provider } from "react-redux";
 import { getToken } from "./service/storageService";
 
-axios.defaults.baseURL = "http://localhost:8081/api/v1";
+// axios.defaults.baseURL = "http://localhost:8081/api/v1";
+axios.defaults.baseURL = "https://finalproject-elishevasegal.onrender.com";
 axios.interceptors.request.use((config) => {
   const token = getToken();
   if (token) {
