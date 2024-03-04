@@ -24,17 +24,11 @@ import { toast } from "react-toastify";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { textAlign } from "@mui/system";
 
-// const filterValues = {
-//   clothing: ["Dress", "Skirt", "Shirt"],
-//   accessories: ["belt", "hat"],
-// };
-
 const ItemsPage = () => {
   let { category = "", filter = "" } = useQueryParams();
   category = category.toLowerCase();
   filter = filter.toLowerCase();
   const [items, setItems] = useState([]);
-  console.log({ items, category, filter });
 
   useEffect(() => {
     axios
@@ -56,9 +50,7 @@ const ItemsPage = () => {
         });
       });
   }, []);
-
-  // const [dataFromServer, setDataFromServer] = useState([]);
-  // const [initialDataFromServer, setInitialDataFromServer] = useState([]);
+  
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
 
@@ -66,51 +58,6 @@ const ItemsPage = () => {
 
   const userData = useSelector((bigPie) => bigPie.authSlice.userData);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("/items")
-  //     .then(({ data }) => {
-  //       //console.log("data", data);
-  //       if (userData) data = likeItemNormalization(data, userData._id);
-  //       //console.log("userData", userData);
-  //       setInitialDataFromServer(data);
-  //       setDataFromServer(data);
-  //       console.log(data);
-  //     })
-  //     .catch((err) => {
-  //       toast("Can't get the items from server", {
-  //         position: "top-center",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //       });
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!initialDataFromServer.length) return;
-  //   //const filter = filter ? filter : "";
-  //   // const filterSubvalues = filterValues[filter];
-  //   setDataFromServer(
-  //     initialDataFromServer.filter((item) => {
-  //       return (
-  //         (filter ? item.title?.indeitemOf(filter) !== -1 : true) &&
-  //         (category ? item.category === category : true)
-  //       );
-  //     })
-  //   );
-  //   // setDataFromServer(
-  //   //   initialDataFromServer.filter(
-  //   //     (item) =>
-  //   //       filterSubvalues.some((x) => item.title.toLowerCase().startsWith(x))
-  //   //     //item.title.toLowerCase().startsWith(filter.toLowerCase())
-  //   //   )
-  //   // );
-  // }, [filter, initialDataFromServer]);
   const handleDeleteItem = async (_id) => {
     setDeleteDialogOpen(true);
     setDeleteItemId(_id);
@@ -118,10 +65,7 @@ const ItemsPage = () => {
 
   const confirmDeleteItem = async () => {
     try {
-      const { data } = await axios.delete("/items/" + deleteItemId);
-      // setDataFromServer((dataFromServerCopy) =>
-      //   dataFromServerCopy.filter((item) => item._id !== deleteItemId)
-      // );
+      const { data } = await axios.delete("/items/" + deleteItemId);;
       setItems((data) => data.filter((item) => item._id !== deleteItemId));
       setDeleteDialogOpen(false);
     } catch (err) {
@@ -144,48 +88,14 @@ const ItemsPage = () => {
     setDeleteItemId(null);
   };
 
-  // const handleLikeItem = async (_id) => {
-  //   try {
-  //     const { data } = await axios.patch("/items/" + _id);
-  //     // setInitialDataFromServer(
-  //     //   initialDataFromServer.map((item) =>
-  //     //     item._id == _id ? { ...item, likes: !item.likes } : item
-  //     //   )
-  //     // );
-  //     setItems((data) =>
-  //       data.map((item) => {
-  //         return item._id === _id ? { ...item, likes: !item.likes } : item;
-  //       })
-  //     );
-  //   } catch (err) {
-  //     toast("There's a problem with the likes request from server", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //   }
-  // };
   const handleViewItem = async (_id) => {
     navigate(`${ROUTES.ITEM}/${_id}`);
   };
 
   const handleAllItems = () => {
-    // console.log(initialDataFromServer);
-    // setDataFromServer(initialDataFromServer);
     navigate(ROUTES.ITEMS);
   };
-  // const handleLikeSuccess = (_id) => {
-  //   setInitialDataFromServer(
-  //     initialDataFromServer.map((item) =>
-  //       item._id == _id ? { ...item, likes: !item.likes } : item
-  //     )
-  //   );
-  // };
+  
   const handleLikeSuccess = (_id) => {
     setItems((items) =>
       items.map((item) =>
@@ -194,31 +104,9 @@ const ItemsPage = () => {
     );
   };
   const handleCategoryButton = (e) => {
-    // console.log(initialDataFromServer, "D");
-    // if (!initialDataFromServer.length) return;
     const category = e.target.value;
     navigate(`${ROUTES.ITEMS}?category=${category}`);
-    //const categoryUrl = category ? category : "";
-
-    // setDataFromServer(
-    //   initialDataFromServer.filter((item) => item.category.startsWith(category))
-    // );
   };
-
-  // const handleDressesFilter = () => {
-  //   console.log(initialDataFromServer);
-  //   if (!initialDataFromServer.length) return;
-  //   setDataFromServer(
-  //     initialDataFromServer.filter((item) => item.title.startsWith("Dress"))
-  //   );
-  // };
-  // const handleBeltsFilter = () => {
-  //   console.log(initialDataFromServer);
-  //   if (!initialDataFromServer.length) return;
-  //   setInitialDataFromServer(
-  //     initialDataFromServer.filter((item) => item.title.startsWith("Belt"))
-  //   );
-  // };
 
   const filteredItems = items.filter((item) => {
     return (
@@ -277,8 +165,6 @@ const ItemsPage = () => {
         </Button>
       </Box>
       <Container sx={{ paddingBottom: "60px" }}>
-        {/* <Grid container spacing={2}>
-          <Grid item xs={12} md={12}> */}
         <Grid
           container
           spacing={2}
@@ -317,15 +203,11 @@ const ItemsPage = () => {
                 like={item.likes}
                 itemNumber={item.itemNumber}
                 onDeleteItem={handleDeleteItem}
-                //onEditItem={handleEditItem}
-                // onLikeItem={handleLikeItem}
                 onLikeSuccess={handleLikeSuccess}
                 onViewItem={handleViewItem}
               />
             </Grid>
           ))}
-          {/* </Grid>
-          </Grid> */}
         </Grid>
 
         <Button
@@ -344,11 +226,6 @@ const ItemsPage = () => {
         >
           Back to all items
         </Button>
-        {/* <div className="App">
-        <h2>Add Image:</h2>
-        <input type="file" onChange={handleChange} />
-        <img src={file} />
-      </div> */}
       </Container>
       <Dialog
         open={deleteDialogOpen}

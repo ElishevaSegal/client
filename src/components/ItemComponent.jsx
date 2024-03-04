@@ -85,37 +85,7 @@ const ItemComponent = ({
   const handleClickViewItem = () => {
     onViewItem(_id);
   };
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  //   if (thisOP === "0.6") {
-  //     setOP("1");
-  //   } else {
-  //     setOP("0.6");
-  //   }
-  // };
-  // const handleCheckChange = async (_id) => {
-  //   try {
-  //     const { data } = await axios.patch("/items/status/" + _id);
-  //     console.log(_id);
-  //     setThisChecked(!thisChecked);
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast("There's a problem at changing status for this user from server", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //   }
-  // };
-  // const handleCheckChangeClick = () => {
-  //   handleCheckChange(_id);
 
-  // };
   return (
     <Card
       sx={{
@@ -131,7 +101,7 @@ const ItemComponent = ({
       <CardActionArea
         sx={{
           "&:hover img": {
-            transform: "scale(1.05)", // Adjust the scale factor as needed
+            transform: "scale(1.05)",
           },
         }}
         onClick={handleClickViewItem}
@@ -144,7 +114,7 @@ const ItemComponent = ({
             height: "40vh",
             objectFit: "cover",
             width: "100%",
-            transition: "transform 0.1s ease-in-out", // Add a smooth transition
+            transition: "transform 0.1s ease-in-out",
           }}
         />
       </CardActionArea>
@@ -252,8 +222,5 @@ ItemComponent.propTypes = {
   onLikeSuccess: PropTypes.func,
   onViewItem: PropTypes.func.isRequired,
 };
-ItemComponent.defaultProps = {
-  img: "https://i.pinimg.com/564x/cb/c1/c1/cbc1c1aeef9092676adcd3c13a167860.jpg",
-  alt: "running",
-};
+
 export default ItemComponent;

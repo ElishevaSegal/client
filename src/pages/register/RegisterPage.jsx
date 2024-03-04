@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-// import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -7,9 +6,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-// import AttachFileIcon from "@mui/icons-material/AttachFile";
 import {
   Alert,
 } from "@mui/material";
@@ -53,7 +50,6 @@ const RegisterPage = () => {
       }}
     >
       <ProfileImage ref={urlRef} />
-      {/* <LockOutlinedIcon /> */}
 
       <Typography
         component="h1"
@@ -227,32 +223,6 @@ const RegisterPage = () => {
               <Alert severity="warning">{errorsState.phone}</Alert>
             )}
           </Grid>
-          {/* <Grid item xs={12}></Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="alt"
-              label="Alt"
-              id="alt"
-              autoComplete="new-alt"
-              value={inputsValue.alt}
-              onChange={handleInputsChange}
-              sx={{
-                "& fieldset": {
-                  borderColor: "inputs.default",
-                },
-                "&:hover fieldset": {
-                  borderColor: "primary.dark",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "primary.dark",
-                },
-              }}
-            />
-            {errorsState && errorsState.alt && (
-              <Alert severity="warning">{errorsState.alt}</Alert>
-            )}
-          </Grid> */}
 
           <Grid item xs={12} md={6}>
             <TextField

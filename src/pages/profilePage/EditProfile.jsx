@@ -33,11 +33,9 @@ const EditProfile = () => {
       .get(`/users/${idFromToken}`)
       .then(({ data }) => {
         setInputsValue(editProfileNormalize(data.user));
-        //console.log(inputsValue.url);
       })
 
       .catch((err) => {
-        console.log(err);
         toast.info("Error from server, can't get your profile to edit", {
           position: toast.POSITION.TOP_CENTER,
         });

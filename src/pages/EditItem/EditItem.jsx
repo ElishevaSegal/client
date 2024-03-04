@@ -19,12 +19,12 @@ import { inputsValueObj } from "../addItemPage/inputsValueObj";
 import { newDataForInputs } from "./newDataForInputs";
 import { updateChangesClick } from "./updateChangeClick";
 import ImageUpload from "../../components/imageInput";
+import { toast } from "react-toastify";
 
 const EditItem = () => {
   const [errorsState, setErrorsState] = useState(null);
   const navigate = useNavigate();
   const [inputsValue, setInputValue] = useState(inputsValueObj());
-  // const [status, setStatus] = useState("available");
   const [category, setCategory] = useState("");
   const urlRef = useRef();
 
@@ -33,16 +33,16 @@ const EditItem = () => {
     axios
       .get("/items/" + _id)
       .then(({ data }) => {
-        console.log("data editItem",data);
         setInputValue(newDataForInputs(data));
         setCategory(data.category);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        toast.info(`Somthing is wrong on server`, err, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      });
   }, []);
-  console.log(inputsValue.url);
-  // const handleChangeStatus = (event) => {
-  //   setStatus(event.target.value);
-  // };
+
   const handleChangeCategory = (event) => {
     setCategory(event.target.value);
   };
@@ -59,7 +59,6 @@ const EditItem = () => {
     const childState = urlRef.current.getChildState();
     updateChangesClick(
       inputsValue,
-
       category,
       setErrorsState,
       navigate,

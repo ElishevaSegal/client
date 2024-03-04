@@ -33,7 +33,7 @@ import ConvertCurrency from "./ConvertUSDtoILS";
 const MyItemPage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
   const [myItemHeader, setMyItemHeader] = useState(
-    "Effortlessly manage, like, edit, or delete your business items. Elevate your professional presence and connections with ease."
+    "Effortlessly manage, like, edit, or delete your business items."
   );
   const [moneyForWithdrawal, setMoneyForWithdrawal] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -51,10 +51,8 @@ const MyItemPage = () => {
   useEffect(() => {
     try {
       axios.get("/items/my-items").then(({ data }) => {
-        //console.log(data);
         const isItems = data.message;
         if (isItems) {
-          //console.log(data.message);
           setMyItemHeader("No items yet, add new item easily now ");
           return;
         }
@@ -64,34 +62,19 @@ const MyItemPage = () => {
         for (let item of data) {
           if (item.status === "sold") {
             const price = item.price;
-            //console.log(price);
             sum += price;
           } else {
-            // console.log(sum);
           }
         }
-        //console.log(data);
         setMoneyForWithdrawal(sum);
       });
     } catch (e) {
-      //console.log(e, "errorrrrr");
+      toast.info(`Somthing is wrong on server`, {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   }, [moneyForWithdrawal]);
-  //   useEffect(() => {
-  //     try {
-  //       axios
-  //         .get(
-  //           `http://data.fixer.io/api/latest69eb4eb0b7cdf5687d7f3464639f7935
-  // `
-  //         )
-  //         .then(({ data }) => {
-  //           console.log(data);
-  //         });
-  //     } catch (e) {
-  //       console.log()
-  //       console.log(e, "errorrrrr");
-  //     }
-  //   }, [moneyForWithdrawal]);
+  
   const handleEditItem = (_id) => {
     navigate(`${ROUTES.EDITITEM}/${_id}`);
   };
@@ -111,7 +94,7 @@ const MyItemPage = () => {
 
   const confirmDeleteItem = async () => {
     try {
-      const { data } = await axios.delete("/items/" + deleteItemId);
+      await axios.delete("/items/" + deleteItemId);
       setDataFromServer((dataFromServerCopy) =>
         dataFromServerCopy.filter((item) => item._id !== deleteItemId)
       );
@@ -136,7 +119,7 @@ const MyItemPage = () => {
   };
   const handleLikeItem = async (_id) => {
     try {
-      const { data } = await axios.patch("/items/" + _id);
+   await axios.patch("/items/" + _id);
     } catch (err) {
       toast("There's a problem at liking the item from server", {
         position: "top-center",
@@ -153,7 +136,7 @@ const MyItemPage = () => {
   const handleLikeSuccess = (_id) => {
     setDataFromServer(
       dataFromServer.map((item) =>
-        item._id == _id ? { ...item, likes: !item.likes } : item
+        item._id === _id ? { ...item, likes: !item.likes } : item
       )
     );
   };
@@ -167,18 +150,14 @@ const MyItemPage = () => {
     setAnchorEl(null);
   };
   const handleDeleteSoldItems = async () => {
-    //console.log(dataFromServer);
     const data = dataFromServer;
-    //console.log(data);
     for (let item of data) {
-      // console.log(item);
-      // console.log(item.status);
-      if (item.status == "sold") {
+      if (item.status === "sold") {
         const _id = item._id;
         try {
-          const { data } = await axios.delete("/items/" + _id);
+           await axios.delete("/items/" + _id);
           setDataFromServer((dataFromServerCopy) =>
-            dataFromServerCopy.filter((item) => item._id != _id)
+            dataFromServerCopy.filter((item) => item._id !== _id)
           );
           setMoneyForWithdrawal(0);
         } catch (err) {
@@ -193,24 +172,19 @@ const MyItemPage = () => {
             theme: "light",
           });
         }
-        // console.log(dataFromServer);
-        // console.log("item", item.status);
       } else {
-        // console.log(item);
       }
     }
   };
   const handleSubmit = () => {
     const joiResponse = validateBankDetails(inputsValue);
     setErrorsState(joiResponse);
-    // console.log(joiResponse);
     if (joiResponse) return;
     if (bankS === "") {
       setErrorsState("bankS");
       return;
     }
     handleDeleteSoldItems();
-    //console.log(inputsValue);
     setAnchorEl(null);
   };
 
@@ -218,11 +192,8 @@ const MyItemPage = () => {
   const id = open ? "simple-popover" : undefined;
 
   const handleChangeBank = (event) => {
-    // console.log(event.target.value);
     let bank = event.target.value;
     setBank(bank);
-
-    //console.log(bankS);
   };
 
   return (

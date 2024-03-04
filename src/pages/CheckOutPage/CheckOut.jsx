@@ -26,6 +26,7 @@ import { getToken } from "../../service/storageService";
 import { jwtDecode } from "jwt-decode";
 import ROUTES from "../../routes/ROUTES";
 import { validatePayment } from "../../validation/validatePayment";
+import { toast } from "react-toastify";
 
 const steps = ["Address", "Payment details", "Review your order"];
 
@@ -69,16 +70,13 @@ const Checkout = () => {
     axios
       .get(`/users/${idFromToken}`)
       .then(({ data }) => {
-        //console.log(data);
         const newData = checkoutNormalize(data.user);
-        // console.log(newData, "new");
         setInputsValue1(newData);
       })
       .catch((err) => {
-        //console.log(err);
-        // toast.info("Error from server, can't get your profile", {
-        //   position: toast.POSITION.TOP_CENTER,
-        // });
+        toast.info("Error from server", {
+          position: toast.POSITION.TOP_CENTER,
+         });
       });
   }, []);
   useEffect(() => {
@@ -92,10 +90,11 @@ const Checkout = () => {
           phone: data.phone,
           userId: data.userId,
         });
-        //console.log(dataFromServer);
       })
       .catch((err) => {
-        console.log(err);
+        toast.info("Error from server", {
+          position: toast.POSITION.TOP_CENTER,
+         });
       });
   }, []);
   useEffect(() => {
@@ -104,40 +103,23 @@ const Checkout = () => {
     axios
       .get("/users/" + userId)
       .then(({ data }) => {
-        //console.log(data.user.name.first, "user");
         setSellerName({
           first: data.user.name.first,
           last: data.user.name.last,
         });
-        console.log(data.name.first, "user");
       })
       .catch((err) => {
-        console.log(err);
+        toast.info("Error from server", {
+          position: toast.POSITION.TOP_CENTER,
+         });
       });
   }, [dataFromServer]);
-  // const handleInputsChange1 = (e) => {
-  //   setInputsValue1((currentState) => ({
-  //     ...currentState,
-  //     [e.target.id]: e.target.value,
-  //   }));
-  //   //chargeAble(inputsValue, setAble);
-  // };
-  // const handleInputsChange = (e) => {
-  //   setInputsValue((currentState) => ({
-  //     ...currentState,
-  //     [e.target.id]: e.target.value,
-  //   }));
-  //   //chargeAble2(inputsValue, setAble);
-  // };
-  // useEffect(() => {
-  //   console.log(addressRef);
-  // }, [addressRef]);
+  
   const getStepContent = (step) => {
     switch (step) {
       case 0:
         return (
           <AddressForm
-            // handleInputsChange1={handleInputsChange1}
             inputsValue1={inputsValue1}
             errorsState={errorsState}
             ref={addersFormRef}
@@ -147,7 +129,6 @@ const Checkout = () => {
       case 1:
         return (
           <Payment
-            // handleInputsChange={handleInputsChange}
             inputsValue={inputsValue}
             errorStatePay={errorStatePay}
             ref={paymentFormRef}
@@ -158,8 +139,6 @@ const Checkout = () => {
           <Review
             inputsValue={inputsValue}
             inputsValue1={inputsValue1}
-            // childState={childState}
-            // childStatePay={childStatePay}
             dataFromServer={dataFromServer}
           />
         );
@@ -168,37 +147,29 @@ const Checkout = () => {
     }
   };
 
-  // const [addressInfo, setAddressInfo] = React.useState({});
+
   const handleSoldItem = async () => {
     try {
-      // const joiResponse = validateItem(inputsValue);
-      // setErrorsState(joiResponse);
-      // if (joiResponse) return;
-      console.log("sold");
       setActiveStep(activeStep + 1);
       const { data } = await axios.put("/items/" + _id, {
         status: "sold",
       });
-      console.log(data);
-      //navigate(`${ROUTES.ORDERPLACED}/${_id}`);
     } catch (err) {
-      console.log(err);
-      // toast("Somthing is missing... try again", {
-      //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
+      toast("Somthing is missing... try again", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const handleNext = () => {
     if (activeStep === 0) {
       const childState = addersFormRef.current.getChildState();
-      console.log(childState);
       setInputsValue1(childState);
       const joiResponse = validateAddress(childState);
       setErrorsState(joiResponse);
@@ -207,11 +178,9 @@ const Checkout = () => {
     }
     if (activeStep === 1) {
       const childStatePay = paymentFormRef.current.getChildState();
-      console.log(childStatePay);
       setInputsValue(childStatePay);
       const joiResponsePay = validatePayment(childStatePay);
       setErrorStatePay(joiResponsePay);
-      // console.log(errorsStatePay);
       if (joiResponsePay) return;
     }
 
@@ -241,11 +210,6 @@ const Checkout = () => {
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
-        {/* <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar> */}
       </AppBar>
       <Container
         component="main"
@@ -295,9 +259,6 @@ const Checkout = () => {
           ) : (
             <Fragment>
               {getStepContent(activeStep)}
-              {/* {errorsState && (
-                <Alert severity="warning">{errorsState.country}</Alert>
-              )} */}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

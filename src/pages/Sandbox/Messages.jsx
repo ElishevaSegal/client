@@ -70,7 +70,6 @@ const MessagesPage = () => {
       setDeleteDialogOpen(false);
     }
   };
-  // const handleDeleteClickButton=()=>
   const handleDeleteCancel = () => {
     setSelectedMessage(null);
     setDeleteDialogOpen(false);
@@ -120,8 +119,6 @@ const MessagesPage = () => {
           </AccordionDetails>
         </Accordion>
       ))}
-
-      {/* Delete Confirmation Dialog */}
       <Dialog open={isDeleteDialogOpen} onClose={handleDeleteCancel}>
         <DialogTitle>Confirmation</DialogTitle>
         <DialogContent>

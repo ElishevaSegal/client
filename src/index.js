@@ -3,8 +3,6 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.js";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -15,24 +13,14 @@ import store from "./store/bigPie";
 import { Provider } from "react-redux";
 import { getToken } from "./service/storageService";
 
-// axios.defaults.baseURL = "http://localhost:8081/api/v1";
-axios.defaults.baseURL = "https://finalproject-elishevasegal.onrender.com";
+axios.defaults.baseURL = "http://localhost:8081/api/v1";
+
 axios.interceptors.request.use((config) => {
   const token = getToken();
+// axios.defaults.baseURL = "http://localhost:8081/api/v1";
+axios.defaults.baseURL = "https://finalproject-elishevasegal.onrender.com";
   if (token) {
-    /*
-      if token exists we edit the request
-      adding headers
-      and sending the request to the server
-    */
-    //config.headers["x-auth-token"] = token;
     config.headers["Authorization"] = `Bearer ${token}`;
-
-    /*
-      headers = {
-        x-auth-token:token
-      }
-    */
   }
   return config;
 });
@@ -48,7 +36,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

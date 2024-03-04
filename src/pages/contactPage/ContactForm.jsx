@@ -7,9 +7,6 @@ import axios from "axios";
 import { validateMessage } from "../../validation/validateMessage";
 
 const ContactForm = () => {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [message, setMessage] = useState("");
   const [errorsState, setErrorsState] = useState(null);
   const [inputsValue, setInputsValue] = useState({
     name: "",
@@ -29,7 +26,6 @@ const ContactForm = () => {
     e.preventDefault();
     try {
       const joiResponse = validateMessage(inputsValue);
-      console.log(joiResponse, "");
       setErrorsState(joiResponse);
       if (joiResponse) return;
       const request = {
@@ -37,8 +33,6 @@ const ContactForm = () => {
         email: inputsValue.email,
         message: inputsValue.message,
       };
-      const { data } = await axios.post("/contact", request);
-      console.log(data);
 
       toast("We got your message, thank you :)", {
         position: "top-center",
@@ -52,7 +46,6 @@ const ContactForm = () => {
       });
       navigate(ROUTES.HOME);
     } catch (err) {
-      //console.log(err, "err");
       toast("Somthing is missing... try again", {
         position: "top-center",
         autoClose: 5000,

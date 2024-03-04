@@ -45,8 +45,6 @@ const LoginPage = () => {
         password: passwordValue,
       });
       const tokenFromData = data.jwt;
-
-      //("token:", tokenFromData);
       storeToken(tokenFromData, rememberMe);
       toast("You logged in successfully", {
         position: "top-center",
@@ -58,7 +56,6 @@ const LoginPage = () => {
         progress: undefined,
         theme: "light",
       });
-     // console.log(data, "loggggg");
       autoLogin(true);
       navigate(ROUTES.HOME);
     } catch (err) {
@@ -113,7 +110,7 @@ const LoginPage = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

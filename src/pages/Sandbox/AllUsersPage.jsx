@@ -167,9 +167,6 @@ const AllUsersPage = () => {
                 >
                   Delete User
                 </Button>
-                {/* <IconButton onClick={() => handleEditUser(user._id)}>
-                  <CreateIcon />
-                </IconButton> */}
               </CardActions>
             </Card>
           </Grid>

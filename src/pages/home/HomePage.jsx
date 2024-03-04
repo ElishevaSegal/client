@@ -20,7 +20,6 @@ import { toast } from "react-toastify";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 import accsesorisePhoto from "../../assets/accsesorise.jpg";
-import blackBackground from "../../assets/darkBackground.jpg";
 import blackLeaves from "../../assets/blackLeaves.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import FilterCategory from "./FilterCategory";
@@ -55,30 +54,7 @@ const moveDown = keyframes`
 `;
 
 const HomePage = () => {
-  // const [dataFromServer, setDataFromServer] = useState([]);
-  // const [initialDataFromServer, setInitialDataFromServer] = useState([]);
-
   const navigate = useNavigate();
-  // const userData = useSelector((bigPie) => bigPie.authSlice.userData);
-  // const query = useQueryParams();
-
-  // useEffect(() => {
-  //   if (!initialDataFromServer.length) return;
-  //   const filter = query.filter ? query.filter : "";
-  //   setDataFromServer(
-  //     initialDataFromServer.filter((item) => item.title.startsWith(filter))
-  //   );
-  // }, [query, initialDataFromServer]);
-
-  //to make the background all of the site:
-  // useEffect(() => {
-  //   // Apply global styles to the body
-  //   // document.body.style.margin = "0";
-  //   // document.body.style.padding = "0";
-  //   document.body.style.backgroundImage = `url(${blackBackground})`;
-  //   //document.body.style.backgroundSize = "cover";
-  // }, []);
-
   const [hasEntered, setHasEntered] = useState(false);
 
   useEffect(() => {
@@ -143,7 +119,7 @@ const HomePage = () => {
               sustainable fashion experience.
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "center", animation: hasEntered ? `${moveDown} 1s forwards` : 'none' }}>
-      <ArrowDownwardIcon sx={{ fontSize: '50px' }} /> {/* Adjust the fontSize here */}
+      <ArrowDownwardIcon sx={{ fontSize: '50px' }} /> 
     </Box>
           </div>
         </div>
@@ -323,14 +299,6 @@ const HomePage = () => {
                 <Typography variant="h6" sx={{ marginBottom: 2 }}>
                   Connect Us
                 </Typography>
-                {/* <IconButton>
-                  <Link
-                    href="https://www.facebook.com/eden.drori2/"
-                    color="inherit"
-                  >
-                    <FacebookIcon />
-                  </Link>
-                </IconButton> */}
                 <IconButton>
                   <Link
                     href="mailto:esegal390@gmail.com?subject=ShopApp%20Project"
@@ -339,61 +307,10 @@ const HomePage = () => {
                     <EmailRounded />
                   </Link>
                 </IconButton>
-
-                {/* <IconButton>
-                  <Link
-                    href="https://www.linkedin.com/in/eden-drori"
-                    color="inherit"
-                  >
-                    <LinkedIn />
-                  </Link>
-                </IconButton> */}
               </Grid>
             </Grid>
           </Container>
         </Box>
-        {/* 
-      <Box sx={{ backgroundColor: "#f7f7f7", paddingY: 4 }}>
-        <Container>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={4} sx={{ textAlign: "center" }}>
-              <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                Customer Service
-              </Typography>
-              <Typography>Help</Typography>
-              <Typography>Track Order</Typography>
-              <Typography>Returns & Exchanges</Typography>
-              <Typography>FAQs</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} sx={{ textAlign: "center" }}>
-              <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                Quick Links
-              </Typography>
-              <Typography>Find a Store</Typography>
-              <Typography>Size Guide</Typography>
-              <Typography>Gift Cards</Typography>
-              <Typography>Student Discount</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} sx={{ textAlign: "center" }}>
-              <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                Connect with Us
-              </Typography>
-              <IconButton>
-                <FacebookIcon />
-              </IconButton>
-              <IconButton>
-                <TwitterIcon />
-              </IconButton>
-              <IconButton>
-                <InstagramIcon />
-              </IconButton>
-              <IconButton>
-                <PinterestIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box> */}
       </Container>
     </Box>
   );

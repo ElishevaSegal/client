@@ -34,10 +34,8 @@ const updateChangesClick = async (
         city: inputsValue.city,
         street: inputsValue.street,
         houseNumber: inputsValue.houseNumber,
-        //zip: +inputsValue.zip,
       },
     });
-    console.log(data);
     toast("Your item has been edit succssefully", {
       position: "top-center",
       autoClose: 5000,

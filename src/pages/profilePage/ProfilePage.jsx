@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [inputsValue, setInputsValue] = useState(inputsValueObj);
-  const [openDialog, setOpenDialog] = useState(false); // State to control the dialog
+  const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,12 +35,10 @@ const ProfilePage = () => {
     axios
       .get(`/users/${idFromToken}`)
       .then(({ data }) => {
-        console.log("dataprofile", data.user);
         const newData = normalizeDataFromServer(data.user);
         setInputsValue(newData);
       })
       .catch((err) => {
-        console.log(err);
         toast.info("Error from server, can't get your profile", {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -52,7 +50,7 @@ const ProfilePage = () => {
   };
 
   const handleDeleteProfile = async () => {
-    setOpenDialog(true); // Open the dialog when delete button is clicked
+    setOpenDialog(true);
   };
 
   const handleConfirmDelete = async () => {
@@ -73,7 +71,7 @@ const ProfilePage = () => {
         theme: "light",
       });
     } finally {
-      setOpenDialog(false); // Close the dialog after handling deletion
+      setOpenDialog(false);
     }
   };
 
@@ -206,8 +204,6 @@ const ProfilePage = () => {
           Delete account
         </Button>
       </Paper>
-
-      {/* Delete Confirmation Dialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>

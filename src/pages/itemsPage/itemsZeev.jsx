@@ -11,11 +11,6 @@ import useQueryParams from "../../hooks/useQueryParams";
 import { toast } from "react-toastify";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
-// const filterValues = {
-//   clothing: ["Dress", "Skirt", "Shirt"],
-//   accessories: ["belt", "hat"],
-// };
-
 const ItemsPage = () => {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
@@ -53,59 +48,6 @@ const ItemsPage = () => {
       });
   }, [filter]);
 
-  // const [dataFromServer, setDataFromServer] = useState([]);
-  // const [initialDataFromServer, setInitialDataFromServer] = useState([]);
-  // const [initialFilteredData, setInitialFilteredData] = useState([]);
-
-  // const navigate = useNavigate();
-
-  // const userData = useSelector((bigPie) => bigPie.authSlice.userData);
-  // const query = useQueryParams();
-  // useEffect(() => {
-  //   // setTimeout(() => {
-  //   //   setRefreshState("1");
-  //   // }, 1000);
-  //   axios
-  //     .get("/items")
-  //     .then(({ data }) => {
-  //       //console.log("data", data);
-  //       if (userData) data = likeItemNormalization(data, userData._id);
-  //       //console.log("userData", userData);
-  //       setInitialDataFromServer(data);
-  //       setDataFromServer(data);
-  //       console.log(data);
-  //     })
-  //     .catch((err) => {
-  //       toast("Can't get the items from server", {
-  //         position: "top-center",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //       });
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!initialDataFromServer.length) return;
-  //   const filter = query.filter ? query.filter : "";
-  //   // const filterSubvalues = filterValues[filter];
-  //   setDataFromServer(
-  //     initialDataFromServer.filter((item) =>
-  //       item.category.toLowerCase().startsWith(filter.toLowerCase())
-  //     )
-  //   );
-  //   // setDataFromServer(
-  //   //   initialDataFromServer.filter(
-  //   //     (item) =>
-  //   //       filterSubvalues.some((x) => item.title.toLowerCase().startsWith(x))
-  //   //     //item.title.toLowerCase().startsWith(filter.toLowerCase())
-  //   //   )
-  //   // );
-  // }, [query, initialDataFromServer]);
 
   const handleDeleteItem = async (_id) => {
     try {
@@ -126,36 +68,7 @@ const ItemsPage = () => {
       });
     }
   };
-  // const handleEditItem = async (_id) => {
-  //   try {
-  //     const { data } = await axios.get("/items/" + _id);
-  //     if (data.user_id == userData._id || userData.isAdmin) {
-  //       navigate(`${ROUTES.EDITITEM}/${_id}`);
-  //     } else {
-  //       toast("You can only edit your items", {
-  //         position: "top-center",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "light",
-  //       });
-  //     }
-  //   } catch (err) {
-  //     toast("There's a problem with the edit request from server", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //   }
-  // };
+ 
   const handleLikeItem = async (_id) => {
     try {
       const { data } = await axios.patch("/items/" + _id);
@@ -192,32 +105,12 @@ const ItemsPage = () => {
     );
   };
   const handleCategoryButton = (e) => {
-    console.log(items, "D");
     if (!items.length) return;
     const category = e.target.value;
     navigate(`${ROUTES.ITEMS}?category=${category}`);
 
-    // setItems(
-    //   items.filter((item) =>
-    //     item.category.toLowerCase().startsWith(filter.toLowerCase())
-    //   )
-    // );
   };
 
-  // const handleDressesFilter = () => {
-  //   console.log(initialDataFromServer);
-  //   if (!initialDataFromServer.length) return;
-  //   setDataFromServer(
-  //     initialDataFromServer.filter((item) => item.title.startsWith("Dress"))
-  //   );
-  // };
-  // const handleBeltsFilter = () => {
-  //   console.log(initialDataFromServer);
-  //   if (!initialDataFromServer.length) return;
-  //   setInitialDataFromServer(
-  //     initialDataFromServer.filter((item) => item.title.startsWith("Belt"))
-  //   );
-  // };
 
   return (
     <Container sx={{ paddingBottom: "60px" }}>
@@ -258,8 +151,6 @@ const ItemsPage = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              //alignItems: "center",
-              //justifyContent: "center",
               alignItems: "flex-end",
               height: "100%",
             }}
@@ -325,11 +216,6 @@ const ItemsPage = () => {
       >
         Back to all items
       </Button>
-      {/* <div className="App">
-        <h2>Add Image:</h2>
-        <input type="file" onChange={handleChange} />
-        <img src={file} />
-      </div> */}
     </Container>
   );
 };

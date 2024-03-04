@@ -12,8 +12,6 @@ const editProfileSubmit = async (
   try {
     const joiResponse = validateEditUser(inputsValue);
     setErrorsState(joiResponse);
-    console.log(joiResponse);
-    console.log(inputsValue);
     if (joiResponse) return;
     const { data } = await axios.put("/users/" + userId, {
       name: {
@@ -46,7 +44,6 @@ const editProfileSubmit = async (
     });
     navigate(ROUTES.PROFILE);
   } catch (err) {
-    console.log(err);
     toast("Something is missing..", {
       position: "top-center",
       autoClose: 5000,

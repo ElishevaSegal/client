@@ -53,8 +53,9 @@ const ImageUpload = forwardRef((url, ref) => {
       setCurrentURL(url);
       setIsImageUploaded(true);
     } catch (error) {
-      console.error("Error uploading file:", error);
-    }
+      toast.info("Error uploading file", {
+        position: toast.POSITION.TOP_CENTER,
+       });
   };
 
   const handleDeleteImage = async () => {
@@ -67,7 +68,9 @@ const ImageUpload = forwardRef((url, ref) => {
       setPreviewURL(null);
       setIsImageUploaded(false);
     } catch (error) {
-      console.error("Error deleting file:", error);
+      toast.info("Error deleting image", {
+        position: toast.POSITION.TOP_CENTER,
+       });
     }
   };
 
@@ -78,7 +81,9 @@ const ImageUpload = forwardRef((url, ref) => {
         response.items.map(async (item) => await getDownloadURL(item))
       );
     } catch (error) {
-      console.error("Error loading initial images:", error);
+      toast.info("Error loading image", {
+        position: toast.POSITION.TOP_CENTER,
+       });
     }
   };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
+import { toast } from "react-toastify";
 
 const ConvertCurrency = ({ api_key, amount }) => {
   const [convertedAmount, setConvertedAmount] = useState(0);
@@ -16,7 +17,9 @@ const ConvertCurrency = ({ api_key, amount }) => {
         const data = await response.json();
 
         if (!data.success) {
-          console.error(`Error: ${data.error.info}`);
+          toast.info(`Error: ${data.error.info}`, {
+            position: toast.POSITION.TOP_CENTER,
+           });
           const amountInILSDefault = amount * 3.5;
           setConvertedAmount(amountInILSDefault);
           return;
@@ -28,7 +31,9 @@ const ConvertCurrency = ({ api_key, amount }) => {
 
         setConvertedAmount(amountInILS.toFixed(2));
       } catch (error) {
-        console.error(`Error: ${error}`);
+        toast.info(`Error: ${error}`, {
+          position: toast.POSITION.TOP_CENTER,
+         });
       }
     };
 
@@ -49,13 +54,5 @@ const ConvertCurrency = ({ api_key, amount }) => {
     </Box>
   );
 };
-
-// // Example usage:
-// const YourReactComponent = () => {
-//   const apiKey = "69eb4eb0b7cdf5687d7f3464639f7935"; // Replace with your API key
-//   const usdAmount = 25; // Replace with the amount you want to convert from USD to ILS
-
-//   return <ConvertCurrency api_key={apiKey} amount={usdAmount} />;
-// };
 
 export default ConvertCurrency;

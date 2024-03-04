@@ -26,7 +26,6 @@ const AddressForm = forwardRef(({ inputsValue1, errorsState }, ref) => {
       ...currentState,
       [e.target.id]: e.target.value,
     }));
-    //console.log(currentState);
   };
 
   useImperativeHandle(ref, () => ({

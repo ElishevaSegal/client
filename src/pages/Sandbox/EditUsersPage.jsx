@@ -68,7 +68,6 @@ const EditUsersPage = () => {
             objectFit: "cover",
           }}
         />
-        {/* <AccountCircle /> */}
       </Avatar>
       <Typography component="h1" variant="h5">
         Edit User
@@ -239,20 +238,6 @@ const EditUsersPage = () => {
               <Alert severity="warning">{errorsState.houseNumber}</Alert>
             )}
           </Grid>
-          {/* <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="zip"
-              label="Zip"
-              id="zip"
-              autoComplete="new-zip"
-              value={inputsValue.zip}
-              onChange={handleInputsChange}
-            />
-            {errorsState && errorsState.zip && (
-              <Alert severity="warning">{errorsState.zip}</Alert>
-            )}
-          </Grid> */}
         </Grid>
         <Grid container spacing={2}>
           <Grid item lg={8} md={8} sm={8} xs>

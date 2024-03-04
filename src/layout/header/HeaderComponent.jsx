@@ -185,9 +185,8 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
           <Switch
             checked={isDarkTheme}
             onChange={handleThemeChange}
-            icon={<WbSunny style={{ color: 'white' }} />} // Icon for light mode
-            checkedIcon={<NightlightRoundIcon style={{ color: 'white' }} />} // Icon for dark mode
-            // You can adjust styles for the switch if needed
+            icon={<WbSunny style={{ color: 'white' }} />}
+            checkedIcon={<NightlightRoundIcon style={{ color: 'white' }} />} 
           />
         </Box>
           <Box sx={{ flexGrow: 1 }} />
@@ -207,22 +206,6 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
               <AccountCircle />
             </IconButton>
           </Box>
-          {/* Remove the following Box to eliminate the MoreIcon */}
-          {/* <Box
-          sx={{ display: { xs: "none", sm: "flex", md: "none", lg: "none" } }}
-        >
-          <IconButton
-            sx={{ padding: "0" }}
-            size="large"
-            aria-label="show more"
-            aria-controls={mobileMenuId}
-            aria-haspopup="true"
-            onClick={handleMobileMenuOpen}
-            color="inherit"
-          >
-            <MoreIcon />
-          </IconButton>
-        </Box> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
@@ -231,8 +214,6 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
         isOpen={isOpen}
         onCloseDrawer={handleCloseDrawerClick}
       />
-
-      {/* Logout Confirmation Dialog */}
       <Dialog open={logoutDialogOpen} onClose={handleLogoutCancel}>
         <DialogTitle>Logout Confirmation</DialogTitle>
         <DialogContent>

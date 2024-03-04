@@ -12,8 +12,7 @@ const firebaseConfig = {
   measurementId: "G-RZ79Y2RKY8",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
-// TODO: Add SDKs for Firebase products that you want to use
+
 

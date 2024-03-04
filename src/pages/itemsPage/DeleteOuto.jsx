@@ -39,7 +39,6 @@ const AutoDeleteSoldItems = ({ dataFromServer, setDataFromServer }) => {
   const isSoldForThreeDays = (item, currentDate) => {
     const saleDate = new Date(item.saleDate);
     const daysDifference = (currentDate - saleDate) / (1000 * 60 * 60 * 24);
-    console.log(daysDifference);
     return daysDifference >= 3;
   };
 

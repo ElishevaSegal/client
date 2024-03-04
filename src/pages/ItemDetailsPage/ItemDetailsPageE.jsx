@@ -15,10 +15,7 @@ import { inputsValueObj } from "../addItemPage/inputsValueObj";
 import { newDataForInputs } from "./newDataForInputs";
 import { height } from "@mui/system";
 
-//import { updateChangesClick } from "./updateChangeClick";
-
 const ItemDetailsPage = () => {
-  //const [errorsState, setErrorsState] = useState(null);
   const navigate = useNavigate();
   const [inputsValue, setInputValue] = useState(inputsValueObj());
   const { _id } = useParams();
@@ -63,10 +60,6 @@ const ItemDetailsPage = () => {
               position: "absolute",
               top: { xs: 25, md: 35 },
               right: { xs: 0, md: 25 },
-              // background: "rgba(255, 255, 255, 0.7)",
-              // padding: "5px",
-              // borderRadius: "5px",
-              // marginRight: "7px",
             }}
           >
             {inputsValue.price} $
@@ -84,9 +77,6 @@ const ItemDetailsPage = () => {
           >
             {inputsValue.brand}
           </Typography>
-          {/* <Typography variant="h5" sx={{ mb: 1, padding: "3px", ml: "7px" }}>
-            {inputsValue.price} $
-          </Typography> */}
           <br />
           <Typography
             variant="h5"
