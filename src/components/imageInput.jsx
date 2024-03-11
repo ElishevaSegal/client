@@ -9,7 +9,6 @@ import {
   uploadBytes,
   getDownloadURL,
   listAll,
-  deleteObject,
 } from "firebase/storage";
 import { storage } from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
@@ -53,9 +52,8 @@ const ImageUpload = forwardRef((url, ref) => {
       setCurrentURL(url);
       setIsImageUploaded(true);
     } catch (error) {
-      toast.info("Error uploading file", {
-        position: toast.POSITION.TOP_CENTER,
-       });
+      console.error("Error uploading file:", error);
+    }
   };
 
   const handleDeleteImage = async () => {
@@ -68,9 +66,7 @@ const ImageUpload = forwardRef((url, ref) => {
       setPreviewURL(null);
       setIsImageUploaded(false);
     } catch (error) {
-      toast.info("Error deleting image", {
-        position: toast.POSITION.TOP_CENTER,
-       });
+      console.error("Error deleting file:", error);
     }
   };
 
@@ -81,9 +77,7 @@ const ImageUpload = forwardRef((url, ref) => {
         response.items.map(async (item) => await getDownloadURL(item))
       );
     } catch (error) {
-      toast.info("Error loading image", {
-        position: toast.POSITION.TOP_CENTER,
-       });
+      console.error("Error loading initial images:", error);
     }
   };
 
